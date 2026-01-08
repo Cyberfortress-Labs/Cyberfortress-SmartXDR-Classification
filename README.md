@@ -5,6 +5,44 @@ A machine-learning–powered log classification system designed to normalize mul
 
 
 
+## ML Model: Bylastic Classification Logs
+
+This pipeline uses the **Bylastic** model from Hugging Face for log classification.
+
+- **Model**: [byviz/bylastic_classification_logs](https://huggingface.co/byviz/bylastic_classification_logs)
+- **License**: Apache 2.0
+- **Created by**: Byviz Analytics
+
+### Key Features
+
+- **Accurate Classification**: Classifies logs into three critical categories: **ERROR**, **WARNING**, and **INFO**
+- **Elastic Compatibility**: Designed to seamlessly integrate with Elasticsearch
+- **High Performance**: Optimized to process large volumes of logs efficiently
+- **Easy Integration**: Can be easily integrated into existing log processing pipelines
+
+### Log Categories
+
+| Category    | Description                                                         |
+| ----------- | ------------------------------------------------------------------- |
+| **ERROR**   | Critical failures or serious problems requiring immediate attention |
+| **WARNING** | Potential issues that could become errors if not properly managed   |
+| **INFO**    | Informational logs about normal system functioning                  |
+
+### Load Model (Python)
+
+```python
+from transformers import AutoTokenizer, AutoModelForSequenceClassification
+
+tokenizer = AutoTokenizer.from_pretrained("byviz/bylastic_classification_logs")
+model = AutoModelForSequenceClassification.from_pretrained("byviz/bylastic_classification_logs")
+```
+
+### Model Performance
+
+Bylastic utilizes advanced NLP techniques and has been trained with diverse log data for high classification accuracy. For detailed performance comparisons (Bylastic vs BERT), visit the [model page on Hugging Face](https://huggingface.co/byviz/bylastic_classification_logs).
+
+
+
 ## **Installation**
 
 ```bash
@@ -97,13 +135,6 @@ eland_import_hub_model \
 * Creates and registers the model under the ML Inference API
 * Starts the model so it can be used in ingest pipelines, search pipelines, or `_infer` APIs
 
-
-
-## **Model Information**
-
-* **Model:** `byviz/bylastic_classification_logs` (HuggingFace)
-* **Output labels:** `ERROR` | `WARNING` | `INFO`
-* **Input:** Normalized logs processed by the Painless script + ML preprocessing pipeline
 
 
 
