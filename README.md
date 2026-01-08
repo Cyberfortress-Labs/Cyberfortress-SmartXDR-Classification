@@ -59,35 +59,32 @@ pip install -r requirements.txt
 
 ```bash
 # 1. Download the model
-python scripts/get_model.py --model_dir ./model
+python src/get_model.py --model_dir ./model
 
 # 2. Inspect the model
-python scripts/inspect_model.py --model_dir ./model --output_res ./inspect
+python src/inspect_model.py --model_dir ./model --output_res ./inspect
 
 # 3. Normalize logs (ECS logs → ML-ready logs)
-python scripts/prepare_ml_ready.py assets/eval_logs/ecs_logs assets/eval_logs/processed_logs
+python src/prepare_ml_ready.py assets/eval_logs/ecs_logs assets/eval_logs/processed_logs
 
 # 4. Extract ML input text file
-python scripts/extract_logs_for_ml.py assets/eval_logs/processed_logs assets/eval_input/eval_data.txt --simple-txt
+python src/extract_logs_for_ml.py assets/eval_logs/processed_logs assets/eval_input/eval_data.txt --simple-txt
 
 # 5. Run inference evaluation
-python scripts/evaluate_model.py assets/eval_input/eval_data.txt 12 assets/eval_results
+python src/evaluate_model.py assets/eval_input/eval_data.txt 12 assets/eval_results
 
 # 6. Visualize results
-python scripts/visualize_results.py --input assets/eval_results/eval_eval_data_20251204_162317.json --output assets/eval_charts
+python src/visualize_results.py --input assets/eval_results/eval_eval_data_20251204_162317.json --output assets/eval_charts
 ```
 
 
 ## **Project Structure**
 
 ```
-ingest/                 # Elasticsearch ingest pipeline + Painless script
-  pipelines/            # bylastic-log-classifier.json
-  scripts/              # bylastic-log-classifier.painless
 
 model/                  # Downloaded model artifacts (safetensors, config, tokenizer)
 
-scripts/
+src/
   prepare_ml_ready.py        # Convert ECS → ML-ready logs
   extract_logs_for_ml.py     # Consolidate ml_input fields
   evaluate_model.py          # Run inference
